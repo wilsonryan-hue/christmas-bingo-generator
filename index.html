@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Christmas bingo card generator: print 1 to 30 different cards</title>
+<meta name="description" content="Free, open-source Christmas bingo card maker in one HTML file. 3x3, 4x4 or 5x5 grids, your own word list, caller sheet, prints 2 cards per A4. No sign-up, nothing stored.">
+<style>
+:root{--navy:#0D1323;--cobalt:#2563EB;--yellow:#FBBF24;--paper:#F7F7F8;--ink:#1F2937;--muted:#6B7280;--line:#E5E7EB;--display:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:1.0625rem;line-height:1.55}
+a{color:var(--cobalt)}
+.wrap{width:min(60rem,calc(100% - 2rem));margin:0 auto;padding:1rem 0 2rem}
+.app h1{font-family:var(--display);font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.15;margin:.2rem 0 .6rem;color:var(--navy)}
+.app .lede{font-size:1.1rem;max-width:46rem}
+.app .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.25rem;margin:1.2rem 0}
+.app label.f{display:block;font-weight:700;color:var(--navy);margin:.2rem 0}
+.app .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1rem 1.2rem}
+.app input[type=number],.app select{font:inherit;border:1.5px solid var(--line);border-radius:8px;padding:.4rem .5rem;background:#fff;max-width:100%}
+.app input.big{font-size:1.2rem;width:7rem}
+.app .opt{display:block;margin:.3rem 0;font-weight:500}
+.app .opt input{margin-right:.4rem}
+.app .go{margin-top:.6rem;font:inherit;font-weight:800;font-size:1.05rem;border:0;border-radius:12px;padding:.75rem 1.2rem;background:var(--yellow);color:var(--navy);cursor:pointer}
+.app .go.alt{background:var(--navy);color:#fff}
+.app .sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.8rem;margin:1rem 0}
+.app .sum div{background:#F0FDF4;border-left:6px solid #16A34A;border-radius:12px;padding:.8rem 1rem}
+.app .sum b{display:block;font-size:1.35rem;color:var(--navy)}
+.app .warn{background:#FEF3C7;border-left:6px solid #D97706;border-radius:10px;padding:.7rem 1rem;margin:.6rem 0}
+.app .safe{background:#EFF6FF;border-left:6px solid var(--cobalt);border-radius:10px;padding:.7rem 1rem;margin:.8rem 0}
+.app .muted{color:var(--muted);font-size:.95rem}
+.app textarea{font:inherit;border:1.5px solid var(--line);border-radius:8px;padding:.5rem;width:100%;min-height:9rem;max-width:100%}
+.app .bcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:1.1rem;margin:1rem 0}
+.app .bc{background:#fff;border:3px solid var(--bc,#B91C1C);border-radius:12px;padding:.6rem;break-inside:avoid;page-break-inside:avoid}
+.app .bc h3{margin:.1rem 0;text-align:center;font-size:1.25rem;letter-spacing:.06em;text-transform:uppercase;color:var(--bc,#B91C1C)}
+.app .bc .no{display:block;text-align:center;font-size:.75rem;color:var(--muted);margin-bottom:.35rem}
+.app .bg{display:grid;gap:3px}
+.app .bg div{display:flex;align-items:center;justify-content:center;text-align:center;border:1.5px solid var(--bc,#B91C1C);border-radius:6px;min-height:3.4rem;padding:.2rem;font-size:.82rem;line-height:1.15;font-weight:600;color:#111;overflow-wrap:anywhere;background:var(--fill,#FEF2F2)}
+.app .bg div.fr{background:var(--bc,#B91C1C);color:#fff;font-weight:800}
+.app .bg.g3 div{min-height:4.6rem;font-size:1rem}
+.app .bg.g4 div{min-height:3.8rem;font-size:.9rem}
+.app .call{background:#fff;border:1.5px dashed var(--line);border-radius:12px;padding:.8rem 1rem;margin:1rem 0}
+.app .call ol{columns:2;column-gap:2rem;margin:.4rem 0 0;padding-left:1.4rem}
+.app .call li{margin:.15rem 0;break-inside:avoid;list-style:none}
+.app .sty-green{--bc:#166534;--fill:#F0FDF4}.app .sty-blue{--bc:#1E3A8A;--fill:#EFF6FF}.app .sty-red{--bc:#B91C1C;--fill:#FEF2F2}.app .sty-plain{--bc:#000;--fill:#fff}
+.app footer{margin-top:2rem}
+@media print{.app h1,.app .lede,.app .inputs,.app #bg-sum,.app .noprint,.app footer,.app .more{display:none!important}
+ body{background:#fff}.wrap{width:auto;padding:0}.app .bcards{display:block;margin:0}@page{margin:1cm}
+ .app .bc{height:12.2cm;margin:0 0 .4cm;padding:.5cm;box-sizing:border-box;border-width:2px}
+ .app .bc:nth-of-type(2n){break-after:page;page-break-after:always}
+ .app .bc h3{font-size:1.5rem}
+ .app .bg div{min-height:0;font-size:11pt}
+ .app .bg.g5 div{height:1.95cm}.app .bg.g4 div{height:2.4cm}.app .bg.g3 div{height:3.1cm;font-size:14pt}
+ .app .call{break-before:page;page-break-before:always;border:0}
+ .app .call ol{font-size:12pt}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media(max-width:560px){.app .bg div{min-height:3rem;font-size:.75rem}}
+</style>
+</head>
+<body>
+<div class="wrap app">
+<h1>Free Christmas bingo card generator</h1>
+<p class="lede">Pick a list, pick a grid, and print as many different bingo cards as you need, with a caller sheet to tick off as you play. Free, no sign-up, nothing saved. This is one self-contained file: save it and open it offline, or host it anywhere.</p>
+<div class="card inputs">
+ <h2 style="margin-top:0">1. Choose your game</h2>
+ <div class="grid">
+  <div><label class="f" for="bg-list">List of squares</label><select id="bg-list"><option value="words">Christmas words</option><option value="day">Christmas Day: things that always happen</option><option value="film">Christmas film bingo: what to spot</option><option value="own">Your own list</option></select></div>
+  <div><label class="f" for="bg-size">Grid size</label><select id="bg-size"><option value="3">3 by 3 (young children)</option><option value="4">4 by 4</option><option value="5" selected>5 by 5 (full game)</option></select></div>
+  <div><label class="f" for="bg-n">How many cards (1 to 30)</label><input type="number" id="bg-n" value="6" min="1" max="30" class="big"></div>
+  <div><label class="f" for="bg-sty">Card style</label><select id="bg-sty"><option value="red">Red</option><option value="green">Green</option><option value="blue">Midnight blue</option><option value="plain">Plain outline (saves ink)</option></select></div>
+  <div><label class="f" for="bg-title">Title on each card</label><input type="text" id="bg-title" value="Christmas Bingo" maxlength="30" style="font:inherit;border:1.5px solid var(--line);border-radius:8px;padding:.4rem .5rem;max-width:100%"></div>
+  <div><label class="opt" style="margin-top:1.7rem"><input type="checkbox" id="bg-free" checked>Free space in the middle (3 by 3 and 5 by 5)</label></div>
+ </div>
+ <div id="bg-ownwrap" style="display:none;margin-top:.8rem"><label class="f" for="bg-own">Your own list: one word or phrase per line</label><textarea id="bg-own" placeholder="One per line, for example:&#10;Grandad's jumper&#10;Cracker joke&#10;..."></textarea></div>
+ <p style="margin:.7rem 0 0"><button class="go" id="bg-go" type="button">Make my cards</button></p>
+</div>
+
+<div id="bg-sum" aria-live="polite"></div>
+<p class="noprint"><button class="go alt" id="bg-print" type="button">Print cards and caller sheet</button></p>
+<div id="bg-cards" class="bcards"></div>
+<div id="bg-call" class="call" style="display:none"></div>
+
+
+<div class="more">
+<h2>How to play</h2>
+<ul>
+ <li>Give everyone a card and a pen, or counters such as buttons or dried pasta.</li>
+ <li>The caller reads the words from the caller sheet in order, ticking each one off.</li>
+ <li>Players mark any word they have. The first to complete a full row, column or diagonal shouts Bingo.</li>
+ <li>Check the winner's squares against the words ticked on the caller sheet.</li>
+</ul>
+<p class="muted">Tip: the more words you give beyond the number of squares, the more different each card is. For a 5 by 5 grid with a free space you need at least 24 different words.</p>
+</div>
+<footer class="muted">MIT licence. Made by <a href="https://www.tchworks.co.uk/free/christmas-bingo-printable-2026/?utm_source=github&amp;utm_medium=repo&amp;utm_campaign=bingo-repo">TCH Works</a>. The hosted version lives on tchworks.co.uk.</footer>
+</div>
+<script>
+(function(){
+var L={"words": ["Santa", "Reindeer", "Snowman", "Tinsel", "Bauble", "Holly", "Mistletoe", "Stocking", "Chimney", "Sleigh", "Elf", "Snowflake", "Wreath", "Candy cane", "Present", "Star", "Angel", "Carol", "Rudolph", "Gingerbread", "Fairy lights", "Cracker", "Turkey", "Pudding", "Robin", "Christmas tree", "Snow", "Scarf", "Penguin", "Bells", "Ribbon", "Mince pie"], "day": ["Someone wears a paper hat", "A terrible cracker joke", "\"What time is dinner?\"", "A sprout left on a plate", "A present in the wrong size", "A phone call to a relative", "Someone dozes on the sofa", "A board game comes out", "Someone says \"just one more\"", "Wrapping paper everywhere", "A film everyone has seen before", "A tangle of fairy lights", "Someone asks for the remote", "Leftovers talked about already", "A cracker toy nobody wants", "A pet steals the attention", "Someone hunts for the batteries", "A walk to get some air", "A tin of chocolates is raided", "Someone says \"I couldn't eat another thing\"", "A quiz or game is argued about", "The washing up is avoided", "A new jumper is put on", "A video call with family", "Someone sings along to a carol", "A very early wake-up", "Stockings are emptied", "A present is guessed by shaking it"], "film": ["Snow falling", "Santa appears", "A reindeer", "A family argument", "A kiss under the mistletoe", "Someone saves Christmas", "A Christmas tree is chosen", "A character learns a lesson", "Carol singing", "A cosy jumper", "Fairy lights", "A big dinner table", "A surprise visitor", "Hot chocolate", "Wrapping presents", "Someone runs through the snow", "A cheesy line", "A snowball fight", "A delayed journey", "A magical moment", "A grumpy character", "A train or plane trip", "A children's choir", "Presents being unwrapped", "A happy ending"]};
+function $(i){return document.getElementById(i);}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function words(){
+ var k=$("bg-list").value,arr;
+ if(k==="own"){arr=$("bg-own").value.split(/\n/).map(function(s){return s.trim();}).filter(function(s){return s;});}
+ else{arr=L[k].slice();}
+ var seen={},out=[];arr.forEach(function(w){var key=w.toLowerCase();if(!seen[key]){seen[key]=1;out.push(w);}});
+ return out;
+}
+function run(){
+ var size=parseInt($("bg-size").value,10),n=Math.max(1,Math.min(30,Math.floor(parseFloat($("bg-n").value)||1)));
+ var useFree=$("bg-free").checked&&(size===3||size===5);
+ var squares=size*size-(useFree?1:0),w=words(),sty=$("bg-sty").value,title=$("bg-title").value.trim()||"Christmas Bingo";
+ $("bg-ownwrap").style.display=$("bg-list").value==="own"?"block":"none";
+ var out=$("bg-cards"),sum=$("bg-sum"),call=$("bg-call");
+ if(w.length<squares){
+  sum.innerHTML='<div class="warn">You need at least '+squares+' different words for a '+size+' by '+size+' grid'+(useFree?' with a free space':'')+', and you have '+w.length+'. Add '+(squares-w.length)+' more, or choose a smaller grid.</div>';
+  out.innerHTML="";call.style.display="none";return;
+ }
+ var cards=[],sigs={},tries=0;
+ while(cards.length<n&&tries<2000){
+  tries++;
+  var pick=shuffle(w).slice(0,squares),sig=pick.join("|");
+  if(sigs[sig]){continue;}
+  sigs[sig]=1;cards.push(pick);
+ }
+ var html="",i,j;
+ for(i=0;i<cards.length;i++){
+  var cells="",c=cards[i],idx=0,mid=Math.floor(size*size/2);
+  for(j=0;j<size*size;j++){
+   if(useFree&&j===mid){cells+='<div class="fr">FREE</div>';}
+   else{cells+='<div>'+esc(c[idx++])+'</div>';}
+  }
+  html+='<div class="bc sty-'+sty+'"><h3>'+esc(title)+'</h3><span class="no">Card '+(i+1)+' of '+cards.length+'</span><div class="bg g'+size+'" style="grid-template-columns:repeat('+size+',1fr)">'+cells+'</div></div>';
+ }
+ out.innerHTML=html;
+ var order=shuffle(w);
+ call.style.display="block";
+ call.innerHTML='<h3 style="margin:0">Caller sheet: read these in order, tick each as you go</h3><ol>'+order.map(function(x){return '<li>&#9744; '+esc(x)+'</li>';}).join("")+'</ol>';
+ sum.innerHTML='<div class="sum"><div><b>'+cards.length+'</b>different card'+(cards.length===1?'':'s')+'</div><div><b>'+size+' x '+size+'</b>grid'+(useFree?' with free space':'')+'</div><div><b>'+w.length+'</b>words on the caller sheet</div></div>'+(cards.length<n?'<div class="warn">Only '+cards.length+' different cards were possible with this list. Add more words for more cards.</div>':'')+(w.length<squares+3?'<div class="safe">Tip: add a few extra words so the cards differ more.</div>':'');
+}
+$("bg-go").onclick=run;
+$("bg-print").onclick=function(){if(!$("bg-cards").children.length){run();}window.print();};
+$("bg-list").onchange=run;$("bg-size").onchange=run;$("bg-sty").onchange=run;$("bg-free").onchange=run;
+$("bg-title").addEventListener("change",run);$("bg-n").addEventListener("change",run);$("bg-own").addEventListener("change",run);
+run();
+})();
+</script>
+</body>
+</html>

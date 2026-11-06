@@ -4,6 +4,8 @@ Make and print 1 to 30 different Christmas bingo cards in your browser, with a c
 
 **Use it now, no install:** [tchworks.co.uk/free/christmas-bingo-printable-2026](https://www.tchworks.co.uk/free/christmas-bingo-printable-2026/?utm_source=github&utm_medium=repo&utm_campaign=bingo-repo)
 
+**Free printable PDF (no install):** [Download the A4 pack](https://github.com/wilsonryan-hue/christmas-bingo-generator/releases/download/v1.0.0-free-printable/christmas-bingo-printable-2026-free.pdf) — 4× 5×5 cards, 2× kids' 3×3, caller sheet ([release notes](https://github.com/wilsonryan-hue/christmas-bingo-generator/releases/tag/v1.0.0-free-printable)).
+
 ## What it does
 
 - Three built-in lists: Christmas words (32), Christmas Day things that always happen (28) and Christmas film spotting (25). The same lists are in `lists.json`.

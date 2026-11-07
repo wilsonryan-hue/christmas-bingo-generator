@@ -33,6 +33,10 @@ Put `index.html` on any static host (GitHub Pages, Netlify, a school intranet, a
 
 For a class party, play a few rounds so everyone wins something. For a family afternoon, use the Christmas Day list and tick squares as they really happen.
 
+## Free Gumroad download
+
+Also free on Gumroad (instant download): https://tchworks.gumroad.com/l/rmbaok
+
 ## Licence
 
 MIT. Made by [TCH Works](https://www.tchworks.co.uk/?utm_source=github&utm_medium=repo&utm_campaign=bingo-repo). The hosted version has more free Christmas tools, including [gift tags](https://www.tchworks.co.uk/free/christmas-gift-tags-printable-2026/?utm_source=github&utm_medium=repo&utm_campaign=bingo-repo) and a [Secret Santa generator](https://www.tchworks.co.uk/free/secret-santa-generator/?utm_source=github&utm_medium=repo&utm_campaign=bingo-repo).
